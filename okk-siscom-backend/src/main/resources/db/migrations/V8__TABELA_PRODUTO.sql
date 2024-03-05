@@ -1,0 +1,17 @@
+CREATE TABLE PRODUTO
+(
+    ID                         NUMBER        NOT NULL,
+    NOME                       VARCHAR2(30)  NOT NULL,
+    DESCRICAO                  VARCHAR2(200) NOT NULL,
+    VALOR_COMPRA               DECIMAL(5, 2) NOT NULL,
+    VALOR_VENDA                DECIMAL(5, 2) NOT NULL,
+    QUANTIDADE_ESTOQUE         NUMBER        NOT NULL,
+    QUANTIDADE_ESTOQUE_CRITICO NUMBER        NOT NULL,
+    DATA_INSERT                TIMESTAMP     NOT NULL,
+    DATA_UPDATE                TIMESTAMP     NOT NULL,
+    UNIDADE_ID                 NUMBER        NOT NULL,
+    FORNECEDOR_ID              NUMBER        NOT NULL,
+    PRIMARY KEY (ID),
+    FOREIGN KEY (UNIDADE_ID) REFERENCES UNIDADE (ID),
+    FOREIGN KEY (FORNECEDOR_ID) REFERENCES FORNECEDOR (ID)
+);
