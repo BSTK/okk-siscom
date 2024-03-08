@@ -2,15 +2,17 @@ version: "3"
 
 services:
 
-  oracle-database:
+  oracle:
     container_name: oracle-database
-    image: gvenzl/oracle-xe
+    image: gvenzl/oracle-free
     ports:
       - "1521:1521"
       - "5500:5500"
     environment:
-      DB_SID: "xe"
-      ORACLE_PASSWORD: "oracle"
+      ORACLE_DATABASE: "OKKSISCOMDB"
+      ORACLE_RANDOM_PASSWORD: "true"
+      APP_USER: "okksiscomdbuser"
+      APP_USER_PASSWORD: "okksiscomdbpassword"
     deploy:
       resources:
         limits:
@@ -19,7 +21,6 @@ services:
           memory: 4GB
     volumes:
       - oracle_data:/opt/oracle/oradata
-      - ./sql/INICIAR-BANCO-DADOS.sql:/docker-entrypoint-initdb.d/INICIAR-BANCO-DADOS.sql
 
 volumes:
   oracle_data:
