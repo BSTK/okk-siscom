@@ -54,5 +54,8 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+### TODO - REMOVER
+V0__TABELA_MOCK.sql
+
 ### VS Code ###
 .vscode/
