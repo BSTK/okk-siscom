@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+
+  oracle-database:
+    container_name: oracle-database
+    image: gvenzl/oracle-xe
+    ports:
+      - "1521:1521"
+      - "5500:5500"
+    environment:
+      DB_SID: "xe"
+      ORACLE_PASSWORD: "oracle"
+    deploy:
+      resources:
+        limits:
+          memory: 4GB
+        reservations:
+          memory: 4GB
+    volumes:
+      - oracle_data:/opt/oracle/oradata
+      - ./sql/INICIAR-BANCO-DADOS.sql:/docker-entrypoint-initdb.d/INICIAR-BANCO-DADOS.sql
+
+volumes:
+  oracle_data:
+    driver: local
