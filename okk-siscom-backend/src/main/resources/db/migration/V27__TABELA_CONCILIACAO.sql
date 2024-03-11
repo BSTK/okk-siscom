@@ -1,0 +1,11 @@
+CREATE TABLE CONCILIACAO
+(
+    ID          NUMBER         NOT NULL,
+    MES         CHAR(2)        NOT NULL,
+    ANO         CHAR(4)        NOT NULL,
+    VALOR       DECIMAL(10, 2) NOT NULL,
+    HISTORICO   VARCHAR2(100),
+    DATA_INSERT TIMESTAMP      NOT NULL,
+    DATA_UPDATE TIMESTAMP      NOT NULL,
+    PRIMARY KEY (ID)
+);
