@@ -1,0 +1,15 @@
+CREATE TABLE COBRANCA
+(
+    ID                   NUMBER       NOT NULL,
+    ASSUNTO              VARCHAR2(50) NOT NULL,
+    TEXTO                BLOB         NOT NULL,
+    DATA_ENVIO           DATE         NOT NULL,
+    CODIGO_PROCESSO      VARCHAR2(30),
+    DATA_PROCESSO        DATE,
+    ADVOGADO_DO_PROCESSO DATE,
+    DATA_INSERT          TIMESTAMP    NOT NULL,
+    DATA_UPDATE          TIMESTAMP    NOT NULL,
+    CLIENTE_ID           NUMBER       NOT NULL,
+    PRIMARY KEY (ID),
+    FOREIGN KEY (CLIENTE_ID) REFERENCES CLIENTE (ID)
+);
