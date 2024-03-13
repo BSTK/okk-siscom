@@ -1,10 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-contas-bancarias',
-  templateUrl: './contas-bancarias.component.html',
-  styleUrl: './contas-bancarias.component.scss'
+  templateUrl: './contas-bancarias.component.html'
 })
 export class ContasBancariasComponent {
-
 }

@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-cartoes',
-  templateUrl: './cartoes.component.html',
-  styleUrl: './cartoes.component.scss'
+  templateUrl: './cartoes.component.html'
 })
 export class CartoesComponent {
 

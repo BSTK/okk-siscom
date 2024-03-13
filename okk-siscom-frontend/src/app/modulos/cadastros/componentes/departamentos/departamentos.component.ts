@@ -1,10 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-departamentos',
-  templateUrl: './departamentos.component.html',
-  styleUrl: './departamentos.component.scss'
+  templateUrl: './departamentos.component.html'
 })
 export class DepartamentosComponent {
-
 }

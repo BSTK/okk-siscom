@@ -1,10 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-contas-a-pagar',
-  templateUrl: './contas-a-pagar.component.html',
-  styleUrl: './contas-a-pagar.component.scss'
+  templateUrl: './contas-a-pagar.component.html'
 })
 export class ContasAPagarComponent {
-
 }

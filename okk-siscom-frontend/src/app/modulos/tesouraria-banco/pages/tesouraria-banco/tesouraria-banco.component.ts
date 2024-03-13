@@ -1,10 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-tesouraria-banco',
-  templateUrl: './tesouraria-banco.component.html',
-  styleUrl: './tesouraria-banco.component.scss'
+  templateUrl: './tesouraria-banco.component.html'
 })
 export class TesourariaBancoComponent {
-
 }

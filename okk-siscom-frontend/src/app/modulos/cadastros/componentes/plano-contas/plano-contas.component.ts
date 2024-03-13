@@ -1,10 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-plano-contas',
-  templateUrl: './plano-contas.component.html',
-  styleUrl: './plano-contas.component.scss'
+  templateUrl: './plano-contas.component.html'
 })
 export class PlanoContasComponent {
-
 }
