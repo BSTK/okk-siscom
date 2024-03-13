@@ -19,50 +19,39 @@ export const CADASTROS_ROUTES: Routes = [
     children: [
       {
         path: 'clientes',
-        component: ClientesComponent,
-        outlet: 'routerOutletCadastros',
-        pathMatch: 'full'
+        component: ClientesComponent
       },
       {
         path: 'fornecedores',
-        pathMatch: 'full',
-        component: FornecedorComponent,
-        outlet: 'routerOutletCadastros'
+        component: FornecedorComponent
       },
       {
         path: 'contas-bancarias',
-        component: ContasBancariasComponent,
-        outlet: 'routerOutletCadastros'
+        component: ContasBancariasComponent
       },
       {
         path: 'unidades',
-        component: UnidadesComponent,
-        outlet: 'routerOutletCadastros'
+        component: UnidadesComponent
       },
       {
         path: 'produtos',
-        component: ProdutosComponent,
-        outlet: 'routerOutletCadastros'
+        component: ProdutosComponent
       },
       {
         path: 'departamentos',
-        component: DepartamentosComponent,
-        outlet: 'routerOutletCadastros'
+        component: DepartamentosComponent
       },
       {
         path: 'cartoes',
-        component: CartoesComponent,
-        outlet: 'routerOutletCadastros'
+        component: CartoesComponent
       },
       {
         path: 'tipo-pagamento-recebimento',
-        component: TipoPagamentoRecebimentoComponent,
-        outlet: 'routerOutletCadastros'
+        component: TipoPagamentoRecebimentoComponent
       },
       {
         path: 'plano-contas',
-        component: PlanoContasComponent,
-        outlet: 'routerOutletCadastros'
+        component: PlanoContasComponent
       }
     ]
   }

@@ -30,7 +30,7 @@ import {
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(CADASTROS_ROUTES)
+    RouterModule.forChild(CADASTROS_ROUTES),
   ]
 })
 export class CadastrosModule {

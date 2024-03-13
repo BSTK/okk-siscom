@@ -4,10 +4,12 @@ import {Routes} from "@angular/router";
 export const HOME_ROUTES: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
+    pathMatch: "full"
   },
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
+    pathMatch: "full"
   }
 ];
