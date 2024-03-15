@@ -1,37 +1,76 @@
 package dev.bstk.okk.siscom.contabancaria.domain;
 
+import dev.bstk.okk.siscom.core.domain.Entidade;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.Builder;
+import lombok.*;
 
-import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
+@Entity
+@Getter
+@Setter
 @Builder
-public record ContaBancaria(
-  Long id,
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "BANCO")
+public class ContaBancaria extends Entidade {
+
+  @Id
+  @GeneratedValue(
+    strategy = GenerationType.SEQUENCE,
+    generator = "SEQUENCE_BANCO"
+  )
+  @SequenceGenerator(name = "SEQUENCE_BANCO", allocationSize = 1)
+  private Long id;
 
   @NotNull
-  UUID uuid,
+  @Column(name = "UUID")
+  private UUID uuid;
 
   @NotNull
   @NotEmpty
-  String nome,
+  @Column(name = "NOME")
+  private String nome;
 
   @NotNull
   @NotEmpty
-  String agencia,
+  @Column(name = "AGENCIA")
+  private String agencia;
 
   @NotNull
   @NotEmpty
-  String conta,
-
-  String gerente,
-  String observacao,
+  @Column(name = "CONTA")
+  private String conta;
 
   @NotNull
-  LocalDateTime dataInsert,
+  @NotEmpty
+  @Column(name = "BANCO")
+  private String banco;
 
-  @NotNull
-  LocalDateTime dataUpdate
-) { }
+  @Column(name = "GERENTE")
+  private String gerente;
+
+  @Column(name = "OBSERVACAO")
+  private String observacao;
+
+  @PrePersist
+  private void prePersist() {
+    setUuid(UUID.randomUUID());
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ContaBancaria that = (ContaBancaria) o;
+    return Objects.equals(id, that.id);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id);
+  }
+}

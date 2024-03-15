@@ -11,7 +11,18 @@ public class ContaBancariaService {
 
   private final ContaBancariaRepository contaBancariaRepository;
 
-  private ContaBancaria novaContaBancaria(final ContaBancaria contaBancaria) {
-    return null;
+  public ContaBancaria novaContaBancaria(final ContaBancaria contaBancaria) {
+    final var existeContaBancariaCadastrada = contaBancariaRepository.existeContaBancariaCadastrada(
+      contaBancaria.getAgencia(),
+      contaBancaria.getConta(),
+      contaBancaria.getBanco()
+    );
+
+    if (existeContaBancariaCadastrada) {
+      throw new IllegalArgumentException("Conta já cadastrada!");
+    }
+
+    return contaBancariaRepository.saveAndFlush(contaBancaria);
   }
+
 }

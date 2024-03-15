@@ -5,5 +5,7 @@ public record ContaBancariaRequest(
   String agencia,
   String conta,
   String gerente,
+  String banco,
   String observacao
-) { }
+) {
+}
