@@ -83,4 +83,28 @@ class ContaBancariaServiceTest {
     Assertions.assertThat(resultado.getDataUpdate()).isNotNull();
   }
 
+  @Test
+  @DisplayName("Deve lançar exception quando tentar cadastrar uma conta que já existe")
+  void t2() {
+    final var contaBancaria = ContaBancaria
+      .builder()
+      .nome("Conta Bradesco")
+      .agencia("123")
+      .conta("1234-5")
+      .banco("381")
+      .gerente("Antonio Alves")
+      .observacao("Conta Matéria Prima")
+      .build();
+
+    Mockito.when(contaBancariaRepository.existeContaBancariaCadastrada(
+      contaBancaria.getAgencia(),
+      contaBancaria.getConta(),
+      contaBancaria.getBanco()
+    )).thenReturn(true);
+
+    Assertions
+      .assertThatThrownBy(() -> contaBancariaService.novaContaBancaria(contaBancaria))
+      .isExactlyInstanceOf(IllegalArgumentException.class)
+      .hasMessage("Conta já cadastrada!");
+  }
 }
