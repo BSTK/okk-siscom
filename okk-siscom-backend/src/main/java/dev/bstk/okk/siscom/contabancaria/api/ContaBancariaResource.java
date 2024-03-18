@@ -8,6 +8,7 @@ import dev.bstk.okk.siscom.contabancaria.service.ContaBancariaService;
 import dev.bstk.okkutil.mapper.modelmapper.Mapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +30,7 @@ public class ContaBancariaResource {
     final var contaBancariaCadastrada = contaBancariaService.novaContaBancaria(contaBancaria);
     final var contaBancariaCadastradaResponse = Mapper.to(contaBancariaCadastrada, ContaBancariaResponse.class);
 
-    return ResponseEntity.ok(contaBancariaCadastradaResponse);
+    return ResponseEntity.status(HttpStatus.CREATED).body(contaBancariaCadastradaResponse);
   }
 
   @GetMapping
