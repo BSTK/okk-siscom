@@ -5,7 +5,7 @@ import dev.bstk.okk.siscom.contabancaria.api.response.ContaBancariaResponse;
 import dev.bstk.okk.siscom.contabancaria.domain.ContaBancaria;
 import dev.bstk.okk.siscom.contabancaria.domain.ContaBancariaRepository;
 import dev.bstk.okk.siscom.contabancaria.service.ContaBancariaService;
-import dev.bstk.okk.siscom.core.helper.Mapper;
+import dev.bstk.okkutil.mapper.modelmapper.Mapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

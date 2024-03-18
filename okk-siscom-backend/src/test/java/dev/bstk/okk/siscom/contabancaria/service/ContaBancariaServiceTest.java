@@ -1,8 +1,9 @@
-package unit.dev.bstk.okk.siscom.contabancaria.service;
+package dev.bstk.okk.siscom.contabancaria.service;
 
 import dev.bstk.okk.siscom.contabancaria.domain.ContaBancaria;
 import dev.bstk.okk.siscom.contabancaria.domain.ContaBancariaRepository;
 import dev.bstk.okk.siscom.contabancaria.service.ContaBancariaService;
+import dev.bstk.okkutil.fixture.Fixture;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,16 +31,7 @@ class ContaBancariaServiceTest {
   @Test
   @DisplayName("Deve cadastrar uma nova conta")
   void t1() {
-    final var contaBancaria = ContaBancaria
-      .builder()
-      .nome("Conta Bradesco")
-      .agencia("123")
-      .conta("1234-5")
-      .banco("381")
-      .gerente("Antonio Alves")
-      .observacao("Conta Matéria Prima")
-      .build();
-
+    final var contaBancaria = Fixture.fixure("/fixture/contabancaria/nova-conta-bancaria.json", ContaBancaria.class);
     Mockito.when(contaBancariaRepository.existeContaBancariaCadastrada(
       contaBancaria.getAgencia(),
       contaBancaria.getConta(),
@@ -86,16 +78,7 @@ class ContaBancariaServiceTest {
   @Test
   @DisplayName("Deve lançar exception quando tentar cadastrar uma conta que já existe")
   void t2() {
-    final var contaBancaria = ContaBancaria
-      .builder()
-      .nome("Conta Bradesco")
-      .agencia("123")
-      .conta("1234-5")
-      .banco("381")
-      .gerente("Antonio Alves")
-      .observacao("Conta Matéria Prima")
-      .build();
-
+    final var contaBancaria = Fixture.fixure("/fixture/contabancaria/nova-conta-bancaria.json", ContaBancaria.class);
     Mockito.when(contaBancariaRepository.existeContaBancariaCadastrada(
       contaBancaria.getAgencia(),
       contaBancaria.getConta(),
