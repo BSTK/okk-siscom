@@ -1,7 +1,6 @@
 package dev.bstk.okk.siscom.contabancaria.api.request;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,20 +10,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ContaBancariaRequest {
 
-  @NotNull(message = "Campo nome é obrigatório")
-  @NotEmpty(message = "Campo nome é obrigatório")
+  @NotBlank(message = "Campo nome não pode ser nulo/vazio")
   private String nome;
 
-  @NotNull(message = "Campo agencia é obrigatório")
-  @NotEmpty(message = "Campo agencia é obrigatório")
+  @NotBlank(message = "Campo agência não pode ser nulo/vazio")
   private String agencia;
 
-  @NotNull(message = "Campo conta é obrigatório")
-  @NotEmpty(message = "Campo conta é obrigatório")
+  @NotBlank(message = "Campo conta não pode ser nulo/vazio")
   private String conta;
 
-  @NotNull(message = "Campo banco é obrigatório")
-  @NotEmpty(message = "Campo banco é obrigatório")
+  @NotBlank(message = "Campo banco não pode ser nulo/vazio")
   private String banco;
 
   private String gerente;
