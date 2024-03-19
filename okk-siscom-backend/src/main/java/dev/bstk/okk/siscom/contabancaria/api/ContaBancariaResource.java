@@ -6,6 +6,7 @@ import dev.bstk.okk.siscom.contabancaria.domain.ContaBancaria;
 import dev.bstk.okk.siscom.contabancaria.domain.ContaBancariaRepository;
 import dev.bstk.okk.siscom.contabancaria.service.ContaBancariaService;
 import dev.bstk.okkutil.mapper.modelmapper.Mapper;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -25,7 +26,7 @@ public class ContaBancariaResource {
 
 
   @PostMapping
-  public ResponseEntity<ContaBancariaResponse> novaContaBancaria(@RequestBody final ContaBancariaRequest request) {
+  public ResponseEntity<ContaBancariaResponse> novaContaBancaria(@RequestBody @Valid final ContaBancariaRequest request) {
     final var contaBancaria = Mapper.to(request, ContaBancaria.class);
     final var contaBancariaCadastrada = contaBancariaService.novaContaBancaria(contaBancaria);
     final var contaBancariaCadastradaResponse = Mapper.to(contaBancariaCadastrada, ContaBancariaResponse.class);

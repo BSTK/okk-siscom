@@ -3,6 +3,8 @@ package dev.bstk.okk.siscom;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -10,11 +12,15 @@ import org.testcontainers.oracle.OracleContainer;
 
 @Slf4j
 @Testcontainers
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public abstract class AppITestContainersConfig {
   private static final OracleContainer ORACLE_DB = new OracleContainer("gvenzl/oracle-free")
     .withEnv("ORACLE_DATABASE", "OKKSISCOMDB")
     .withEnv("APP_USER", "okksiscomdbuser")
     .withEnv("APP_USER_PASSWORD", "okksiscomdbpassword");
+
+  @LocalServerPort
+  protected Integer portaHttp;
 
   @DynamicPropertySource
   static void propertyConfig(final DynamicPropertyRegistry registry) {
@@ -48,5 +54,9 @@ public abstract class AppITestContainersConfig {
       containerId,
       containerName
     );
+  }
+
+  protected String url(final String urlPath) {
+    return String.format("http://localhost:%s%s", portaHttp, urlPath);
   }
 }
