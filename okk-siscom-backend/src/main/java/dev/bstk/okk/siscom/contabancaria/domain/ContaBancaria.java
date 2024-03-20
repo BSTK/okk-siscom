@@ -1,6 +1,7 @@
 package dev.bstk.okk.siscom.contabancaria.domain;
 
 import dev.bstk.okk.siscom.core.domain.Entidade;
+import dev.bstk.okk.siscom.core.domain.UUIDConverter;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -27,6 +28,7 @@ public class ContaBancaria extends Entidade {
   private Long id;
 
   @NotNull
+  @Convert(converter = UUIDConverter.class)
   @Column(name = "UUID")
   private UUID uuid;
 

@@ -20,7 +20,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class ContaBancariaResourceITest extends AppITestContainersConfig {
+class ContaBancariaResourceCadastrarNovaContaBancariaITest extends AppITestContainersConfig {
 
   @LocalServerPort
   private Integer portaHttp;

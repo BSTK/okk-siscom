@@ -6,7 +6,5 @@
   "conta": "56789-0",
   "gerente": "Maria Oliveira",
   "banco": "381",
-  "observacao": "Conta corrente",
-  "dataInsert": "2024-03-15T10:30:00Z",
-  "dataUpdate": "2024-03-15T10:45:00Z"
+  "observacao": "Conta corrente"
 }

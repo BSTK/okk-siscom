@@ -3,5 +3,7 @@
   "nome": "Nubank",
   "agencia": "0001",
   "conta": "1111-0",
-  "banco": "241"
+  "banco": "241",
+  "gerente": "Novo Gerente",
+  "observacao": "Nova Observação"
 }
