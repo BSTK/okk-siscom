@@ -2,7 +2,7 @@ package dev.bstk.okk.siscom.contabancaria.service;
 
 import dev.bstk.okk.siscom.contabancaria.domain.ContaBancaria;
 import dev.bstk.okk.siscom.contabancaria.domain.ContaBancariaRepository;
-import dev.bstk.okk.siscom.contabancaria.service.ContaBancariaService;
+import dev.bstk.okk.siscom.core.handlerexception.exception.RecursoNaoEncontradoException;
 import dev.bstk.okkutil.fixture.Fixture;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -14,6 +14,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.Instant;
+import java.util.Optional;
 import java.util.Random;
 import java.util.UUID;
 
@@ -89,5 +90,70 @@ class ContaBancariaServiceTest {
       .assertThatThrownBy(() -> contaBancariaService.novaContaBancaria(contaBancaria))
       .isExactlyInstanceOf(IllegalArgumentException.class)
       .hasMessage("Conta já cadastrada!");
+
+    Mockito.verifyNoMoreInteractions(contaBancariaRepository);
+  }
+
+  @Test
+  @DisplayName("Deve atualizar dados de um conta bancária já existente")
+  void t3() {
+    final var uuidAtualizar = UUID.randomUUID();
+    final var contaBancariaJaCadastrada = Fixture.fixure("/fixture/contabancaria/nova-conta-bancaria.json", ContaBancaria.class);
+    final var contaBancariaParaAtualizar = Fixture.fixure("/fixture/contabancaria/conta-bancaria-atualizar.json", ContaBancaria.class);
+
+    Mockito
+      .when(contaBancariaRepository.buscarPorUuid(uuidAtualizar))
+      .thenReturn(Optional.of(contaBancariaJaCadastrada));
+
+    Mockito
+      .when(contaBancariaRepository.saveAndFlush(contaBancariaJaCadastrada))
+      .thenAnswer(mock -> {
+        final var contaBancariaAtualizada = (ContaBancaria) mock.getArguments()[0];
+        contaBancariaAtualizada.setId(contaBancariaJaCadastrada.getId());
+        contaBancariaAtualizada.setUuid(contaBancariaJaCadastrada.getUuid());
+        contaBancariaAtualizada.setDataUpdate(Instant.now());
+
+        return contaBancariaAtualizada;
+      });
+
+    final var resultado = contaBancariaService.atualizarContaBancaria(
+      uuidAtualizar,
+      contaBancariaParaAtualizar
+    );
+
+    Assertions.assertThat(resultado).isNotNull();
+    Assertions.assertThat(resultado.getId()).isNotNull();
+    Assertions.assertThat(resultado.getUuid()).isNotNull();
+
+    Assertions.assertThat(resultado.getNome()).isEqualTo(contaBancariaParaAtualizar.getNome());
+    Assertions.assertThat(resultado.getAgencia()).isEqualTo(contaBancariaParaAtualizar.getAgencia());
+    Assertions.assertThat(resultado.getConta()).isEqualTo(contaBancariaParaAtualizar.getConta());
+    Assertions.assertThat(resultado.getBanco()).isEqualTo(contaBancariaParaAtualizar.getBanco());
+    Assertions.assertThat(resultado.getGerente()).isEqualTo(contaBancariaParaAtualizar.getGerente());
+    Assertions.assertThat(resultado.getObservacao()).isEqualTo(contaBancariaParaAtualizar.getObservacao());
+
+    Mockito.verify(contaBancariaRepository).buscarPorUuid(uuidAtualizar);
+    Mockito.verify(contaBancariaRepository).saveAndFlush(contaBancariaJaCadastrada);
+  }
+
+  @Test
+  @DisplayName("Deve lançar exception quando tentar atualizar uma conta que não existe")
+  void t4() {
+    final var uuidAtualizar = UUID.randomUUID();
+    final var contaBancariaParaAtualizar = Fixture.fixure("/fixture/contabancaria/conta-bancaria-atualizar.json", ContaBancaria.class);
+
+    Mockito
+      .when(contaBancariaRepository.buscarPorUuid(uuidAtualizar))
+      .thenReturn(Optional.empty());
+
+    Assertions
+      .assertThatThrownBy(() -> contaBancariaService.atualizarContaBancaria(
+        uuidAtualizar,
+        contaBancariaParaAtualizar
+      ))
+      .isExactlyInstanceOf(RecursoNaoEncontradoException.class)
+      .hasMessage("Não existe conta cadastrada!");
+
+    Mockito.verifyNoMoreInteractions(contaBancariaRepository);
   }
 }
