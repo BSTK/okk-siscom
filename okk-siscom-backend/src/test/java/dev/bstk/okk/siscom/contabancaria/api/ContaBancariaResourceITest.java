@@ -1,6 +1,7 @@
 package dev.bstk.okk.siscom.contabancaria.api;
 
 import dev.bstk.okk.siscom.AppITestContainersConfig;
+import dev.bstk.okk.siscom.AppTestUtil;
 import dev.bstk.okk.siscom.contabancaria.api.request.ContaBancariaRequest;
 import dev.bstk.okk.siscom.contabancaria.domain.ContaBancariaRepository;
 import dev.bstk.okkutil.fixture.Fixture;
@@ -14,9 +15,15 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ContaBancariaResourceITest extends AppITestContainersConfig {
+
+  @LocalServerPort
+  private Integer portaHttp;
 
   @Autowired
   private ContaBancariaRepository contaBancariaRepository;
@@ -101,7 +108,7 @@ class ContaBancariaResourceITest extends AppITestContainersConfig {
       .and()
       .body(Json.toString(request))
       .when()
-      .post(url("/v1/api/contas-bancarias"))
+      .post(AppTestUtil.url(portaHttp,"/v1/api/contas-bancarias"))
       .then()
       .extract()
       .response();

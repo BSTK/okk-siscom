@@ -7,7 +7,8 @@ Siscom era um sistema de ERP feito em desktop utilizando Java Swing. Um ERP comu
 
 Recriar esse sistemas com novas tecnologias e agora para Web está sendo uma atividade interessante, onde aborda uma nova maneira de pensar em como desenvolver software em contraste com o passado lá de 2008.
 
-A nova roupagem, utiliza como base um backend com Java 17 e Spring Boot e Angular 17 para frontend.
+A nova roupagem, utiliza como base um backend com Java 17 e Spring Boot e Angular 17 para frontend, CI/CD com Jenkins ou possivelmente Git Hub Actions.
+
 O foco também estará no uso de frameworks e ferramentas na parte de qualidade de softwware, boas praticas e testes, em especial, testes unitários, de integração e mutação.
 
 ## Ferramentas utilizadas até o momento

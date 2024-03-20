@@ -11,6 +11,7 @@ class AppTests extends AppITestContainersConfig {
   @Test
   @DisplayName("Deve carregar o contexto do Spring Boot")
   void t1() {
-      Assertions.assertDoesNotThrow(() -> {});
+    Assertions.assertDoesNotThrow(() -> {
+    });
   }
 }
