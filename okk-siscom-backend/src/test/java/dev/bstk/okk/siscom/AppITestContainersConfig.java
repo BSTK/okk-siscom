@@ -14,6 +14,7 @@ import org.testcontainers.oracle.OracleContainer;
 @Testcontainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public abstract class AppITestContainersConfig {
+
   private static final OracleContainer ORACLE_DB = new OracleContainer("gvenzl/oracle-free")
     .withEnv("ORACLE_DATABASE", "OKKSISCOMDB")
     .withEnv("APP_USER", "okksiscomdbuser")
