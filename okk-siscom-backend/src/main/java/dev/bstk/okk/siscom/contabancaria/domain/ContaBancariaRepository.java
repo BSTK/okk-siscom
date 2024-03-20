@@ -5,6 +5,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Repository
 public interface ContaBancariaRepository extends JpaRepository<ContaBancaria, Long> {
 
@@ -21,4 +24,6 @@ public interface ContaBancariaRepository extends JpaRepository<ContaBancaria, Lo
     @Param("banco") final String banco
   );
 
+  @Query("SELECT cb FROM ContaBancaria cb WHERE cb.uuid = :uuid")
+  Optional<ContaBancaria> buscarPorUuid(@Param("uuid") final UUID uuid);
 }

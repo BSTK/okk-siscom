@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -24,7 +25,6 @@ public class ContaBancariaResource {
   private final ContaBancariaService contaBancariaService;
   private final ContaBancariaRepository contaBancariaRepository;
 
-
   @PostMapping
   public ResponseEntity<ContaBancariaResponse> novaContaBancaria(@RequestBody @Valid final ContaBancariaRequest request) {
     final var contaBancaria = Mapper.to(request, ContaBancaria.class);
@@ -34,11 +34,21 @@ public class ContaBancariaResource {
     return ResponseEntity.status(HttpStatus.CREATED).body(contaBancariaCadastradaResponse);
   }
 
+  @PutMapping("/{uuid}")
+  public ResponseEntity<ContaBancariaResponse> atualizarContaBancaria(@PathVariable("uuid") final UUID uuid,
+                                                                      @RequestBody @Valid final ContaBancariaRequest request) {
+    final var contaBancaria = Mapper.to(request, ContaBancaria.class);
+    final var contaBancariaAtualizada = contaBancariaService.atualizarContaBancaria(uuid, contaBancaria);
+    final var contaBancariaAtualizadaResponse = Mapper.to(contaBancariaAtualizada, ContaBancariaResponse.class);
+
+    return ResponseEntity.ok(contaBancariaAtualizadaResponse);
+  }
+
   @GetMapping
   public ResponseEntity<List<ContaBancariaResponse>> contasBancarias() {
-    final var contasBancariasCadastradas = contaBancariaRepository.findAll();
-    final var contasBancariasCadastradasResponse = Mapper.list(contasBancariasCadastradas, ContaBancariaResponse.class);
+    final var contasBancarias = contaBancariaRepository.findAll();
+    final var contasBancariasResponse = Mapper.list(contasBancarias, ContaBancariaResponse.class);
 
-    return ResponseEntity.ok(contasBancariasCadastradasResponse);
+    return ResponseEntity.ok(contasBancariasResponse);
   }
 }
