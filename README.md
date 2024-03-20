@@ -7,7 +7,7 @@ Siscom era um sistema de ERP feito em desktop utilizando Java Swing. Um ERP comu
 
 Recriar esse sistemas com novas tecnologias e agora para Web está sendo uma atividade interessante, onde aborda uma nova maneira de pensar em como desenvolver software em contraste com o passado lá de 2008.
 
-Está nova roupagem, utiliza como base um backend com Java 17 e Spring Boot e Angular 17 para frontend.
+A nova roupagem, utiliza como base um backend com Java 17 e Spring Boot e Angular 17 para frontend.
 O foco também estará no uso de frameworks e ferramentas na parte de qualidade de softwware, boas praticas e testes, em especial, testes unitários, de integração e mutação.
 
 ## Ferramentas utilizadas até o momento
@@ -16,12 +16,14 @@ O foco também estará no uso de frameworks e ferramentas na parte de qualidade 
 - Java 17
 - Maven
 - Spring Boot versão 3.x
+- Spring Security e OAuth
 - Flyway
 - Docker e Docker Composer
 - Banco de dados Oracle
 - TestContainers
 - AssertJ
 - RestAssured
+- WireMock
 
 ### Frontend
 - Angular 17
@@ -52,4 +54,4 @@ Com Docker na sua máquina e de preferencia o JDK 17, podemos executar o maven p
 
 ## Considerações Finais
 
-Esta documento está sendo atualizado a medida que o desnevolvimento avança.
+Este documento está sendo atualizado a medida que o desnevolvimento avança.
