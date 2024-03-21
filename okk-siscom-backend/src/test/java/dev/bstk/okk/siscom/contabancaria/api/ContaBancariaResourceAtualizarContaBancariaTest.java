@@ -1,6 +1,6 @@
 package dev.bstk.okk.siscom.contabancaria.api;
 
-import dev.bstk.okk.siscom.AppITestContainersConfig;
+import dev.bstk.okk.siscom.AppTestContainer;
 import dev.bstk.okk.siscom.AppTestUtil;
 import dev.bstk.okk.siscom.contabancaria.api.request.ContaBancariaRequest;
 import dev.bstk.okk.siscom.contabancaria.domain.ContaBancaria;
@@ -18,7 +18,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class ContaBancariaResourceAtualizarContaBancariaITest extends AppITestContainersConfig {
+class ContaBancariaResourceAtualizarContaBancariaTest extends AppTestContainer {
 
   @LocalServerPort
   private Integer portaHttp;
