@@ -152,7 +152,7 @@ class ContaBancariaServiceTest {
         contaBancariaParaAtualizar
       ))
       .isExactlyInstanceOf(RecursoNaoEncontradoException.class)
-      .hasMessage("Não existe conta cadastrada!");
+      .hasMessage(String.format("Não existe conta cadastrada para uuid [ %s ]", uuidAtualizar));
 
     Mockito.verifyNoMoreInteractions(contaBancariaRepository);
   }

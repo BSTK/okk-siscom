@@ -17,6 +17,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 
+import java.util.UUID;
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ContaBancariaResourceAtualizarContaBancariaTest extends AppTestContainer {
 
@@ -34,8 +36,8 @@ class ContaBancariaResourceAtualizarContaBancariaTest extends AppTestContainer {
   @Test
   @DisplayName("Deve atualizar dados de um conta bancária já existente")
   void t1() {
-    final var contaBancariaMassadados = Fixture.fixure("/fixture/contabancaria/nova-conta-bancaria.json", ContaBancaria.class);
-    final var contaBancariaJaCadastrada = contaBancariaRepository.saveAndFlush(contaBancariaMassadados);
+    final var contaBancariaMassaDados = Fixture.fixure("/fixture/contabancaria/nova-conta-bancaria.json", ContaBancaria.class);
+    final var contaBancariaJaCadastrada = contaBancariaRepository.saveAndFlush(contaBancariaMassaDados);
 
     final var urlAtualizarConta = String.format("/v1/api/contas-bancarias/%s", contaBancariaJaCadastrada.getUuid());
     final var contaBancariaParaAtualizarRequest = Fixture.fixure("/fixture/contabancaria/conta-bancaria-atualizar.json", ContaBancariaRequest.class);
@@ -74,5 +76,33 @@ class ContaBancariaResourceAtualizarContaBancariaTest extends AppTestContainer {
         Assertions.assertThat(contaBancariaParaAtualizarRequest.getGerente()).isEqualTo(resultado.getGerente());
         Assertions.assertThat(contaBancariaParaAtualizarRequest.getObservacao()).isEqualTo(resultado.getObservacao());
       });
+  }
+
+  @Test
+  @DisplayName("Deve lançar exception ao tentar atualizar uma conta que não existe")
+  void t2() {
+    final var uuidQueNaoExiste = UUID.randomUUID();
+    final var urlAtualizarConta = String.format("/v1/api/contas-bancarias/%s", uuidQueNaoExiste);
+    final var contaBancariaParaAtualizarRequest = Fixture.fixure("/fixture/contabancaria/conta-bancaria-atualizar.json", ContaBancariaRequest.class);
+
+    final var response = RestAssured
+      .given()
+      .header("Content-Type", "application/json")
+      .and()
+      .body(Json.toString(contaBancariaParaAtualizarRequest))
+      .when()
+      .put(AppTestUtil.url(portaHttp, urlAtualizarConta))
+      .then()
+      .extract()
+      .response();
+
+    Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.NOT_FOUND.value());
+    Assertions.assertThat(response.jsonPath().getString("dataHora")).isNotNull().isNotEmpty();
+    Assertions.assertThat(response.jsonPath().getList("erros"))
+      .contains(String.format("Não existe conta cadastrada para uuid [ %s ]", uuidQueNaoExiste));
+
+    Assertions
+      .assertThat(contaBancariaRepository.findAll())
+      .isEmpty();
   }
 }

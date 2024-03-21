@@ -36,7 +36,9 @@ public class ContaBancariaService {
       .buscarPorUuid(uuid)
       .orElseThrow(() -> {
         log.warn("Não existe conta cadastrada para uuid [ {} ]", uuid);
-        return new RecursoNaoEncontradoException("Não existe conta cadastrada!");
+        return new RecursoNaoEncontradoException(
+          String.format("Não existe conta cadastrada para uuid [ %s ]", uuid)
+        );
       });
 
     contaBancariaAtualizar.setNome(contaBancaria.getNome());
